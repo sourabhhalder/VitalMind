@@ -2,3 +2,7 @@
    Model: stress_model.pkl  |  Scaler: scaler.pkl
  * Serving Flask app 'app'
  * Debug mode: on
+🧠 VitalMind ML API starting on http://localhost:5000
+   Model: stress_model.pkl  |  Scaler: scaler.pkl
+🧠 VitalMind ML API starting on http://localhost:5000
+   Model: stress_model.pkl  |  Scaler: scaler.pkl

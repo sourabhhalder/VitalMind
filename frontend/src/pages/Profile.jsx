@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Mail, Calendar, Weight, MapPin, Camera, Edit2, Check, BrainCircuit, Activity, Heart, Shield } from 'lucide-react';
+import { User, Mail, Calendar, Weight, MapPin, Camera, Edit2, Check, BrainCircuit, Activity, Heart, Shield, Briefcase } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
@@ -120,6 +120,22 @@ const Profile = () => {
                   <input type="text" name="location" value={editedUser.location} onChange={handleInputChange} className="profile-input" />
                 ) : (
                   <p>{user.location || 'Not Set'}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="info-card glass-panel">
+              <div className="info-icon"><Briefcase size={20} color="#f59e0b" /></div>
+              <div className="info-data">
+                <label>Profession</label>
+                {isEditing ? (
+                  <select name="profession" value={editedUser.profession || 'Nothing'} onChange={handleInputChange} className="profile-input">
+                    <option>Student</option>
+                    <option>Worker</option>
+                    <option>Nothing</option>
+                  </select>
+                ) : (
+                  <p>{user.profession || 'Nothing'}</p>
                 )}
               </div>
             </div>
