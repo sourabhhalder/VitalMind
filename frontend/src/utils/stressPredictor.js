@@ -15,6 +15,7 @@ function mapFormDataToAPIInput(formData) {
     temperature:   parseFloat(formData.temp     || formData.temperature  || 36.8),
     sleep_hours:   parseFloat(formData.sleepHours || formData.sleep_hours || 7),
     workout_hours: parseFloat(formData.exerciseTime || formData.workout_hours || 0),
+    profession:    formData.profession || "Nothing",
   };
 }
 
@@ -58,12 +59,12 @@ function jsFallbackPredict(data) {
     high:   stress_index === 2 ? 0.8 : 0.1,
   };
 
-  const ai_schedule = generateJSSchedule(stress_index, sleep_hours);
+  const ai_schedule = generateJSSchedule(stress_index, sleep_hours, data.profession);
 
   return { stress_level, stress_index, confidence, ai_schedule, source: "js-fallback" };
 }
 
-function generateJSSchedule(stressIndex, sleepHours) {
+function generateJSSchedule(stressIndex, sleepHours, profession = "Nothing") {
   const schedules = {
     0: [
       { time: "06:00 AM", task: "Morning Run / Cardio (30 min)", type: "exercise", icon: "🏃" },
@@ -103,6 +104,14 @@ function generateJSSchedule(stressIndex, sleepHours) {
   if (sleepHours < 5) {
     schedule = schedule.filter(item => item.type !== "exercise");
     schedule.unshift({ time: "07:00 AM", task: "Extra Rest Recommended — Slow Start", type: "sleep", icon: "💤" });
+  }
+
+  if (profession === "Student") {
+    schedule.splice(3, 0, { time: "03:30 PM", task: "Focused Study Revision Block (90 min)", type: "study", icon: "📘" });
+  } else if (profession === "Worker") {
+    schedule.splice(3, 0, { time: "03:30 PM", task: "Priority Work Sprint + Email Cleanup", type: "work", icon: "💼" });
+  } else {
+    schedule.splice(3, 0, { time: "03:30 PM", task: "Personal Hobby / Skill Practice", type: "break", icon: "🌿" });
   }
 
   return schedule;

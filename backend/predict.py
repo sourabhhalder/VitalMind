@@ -48,7 +48,7 @@ def create_features(data):
 
 
 # ─── SCHEDULE GENERATOR ─────────────────────────────────────────────────────
-def generate_ai_schedule(stress_index, sleep_hours, workout_hours):
+def generate_ai_schedule(stress_index, sleep_hours, workout_hours, profession="Nothing"):
     """
     Build a dynamic daily schedule based on predicted stress level.
     stress_index: 0 = Low, 1 = Medium, 2 = High
@@ -97,6 +97,15 @@ def generate_ai_schedule(stress_index, sleep_hours, workout_hours):
         base = [item for item in base if item["type"] != "exercise"]
         base.insert(0, {"time": "07:00 AM", "task": "Extra Rest Recommended — Slow Start", "type": "sleep", "icon": "💤"})
 
+    profession = (profession or "Nothing").strip().title()
+
+    if profession == "Student":
+        base.insert(3, {"time": "03:30 PM", "task": "Focused Study Revision Block (90 min)", "type": "study", "icon": "📘"})
+    elif profession == "Worker":
+        base.insert(3, {"time": "03:30 PM", "task": "Priority Work Sprint + Email Cleanup", "type": "work", "icon": "💼"})
+    else:
+        base.insert(3, {"time": "03:30 PM", "task": "Personal Hobby / Skill Practice", "type": "break", "icon": "🌿"})
+
     return base
 
 
@@ -115,7 +124,8 @@ def predict_stress(data):
         ai_schedule = generate_ai_schedule(
             stress_index,
             data.get("sleep_hours", 7),
-            data.get("workout_hours", 0)
+            data.get("workout_hours", 0),
+            data.get("profession", "Nothing")
         )
 
         return {

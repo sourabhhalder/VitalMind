@@ -37,8 +37,16 @@
       "password": "James@1234",
       "name": "James",
       "streak": 1,
-      "lastLoginDate": "2026-04-23T20:01:50.135Z",
+      "lastLoginDate": "2026-04-23T21:28:36.626Z",
       "id": "--8J_duPL7I"
+    },
+    {
+      "email": "jack@gmail.com",
+      "password": "jack@12345",
+      "name": "jack",
+      "streak": 1,
+      "lastLoginDate": "2026-04-23T21:31:45.565Z",
+      "id": "E-VHBCVfmUk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

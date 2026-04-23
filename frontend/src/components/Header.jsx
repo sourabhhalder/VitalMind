@@ -44,6 +44,7 @@ const Header = ({ theme, toggleTheme }) => {
           <Link to="/about">About</Link>
           {user && (
             <>
+              <Link to="/form">Health Form</Link>
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/achievements">Achievements</Link>
               <Link to="/environment">Sensors</Link>
